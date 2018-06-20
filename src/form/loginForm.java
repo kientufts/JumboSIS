@@ -39,6 +39,7 @@ public class loginForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldUsername = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jCheckBoxShowPass = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,20 +86,29 @@ public class loginForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel2.setText("Password:");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(30, 130, 100, 22);
+        jLabel2.setBounds(10, 130, 100, 22);
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel3.setText("Username:");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(30, 80, 100, 22);
+        jLabel3.setBounds(10, 80, 100, 22);
 
         jTextFieldUsername.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jPanel3.add(jTextFieldUsername);
-        jTextFieldUsername.setBounds(120, 70, 220, 40);
+        jTextFieldUsername.setBounds(100, 70, 210, 40);
 
         jPasswordField1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jPanel3.add(jPasswordField1);
-        jPasswordField1.setBounds(120, 120, 220, 40);
+        jPasswordField1.setBounds(100, 120, 210, 40);
+
+        jCheckBoxShowPass.setText("Show Pass");
+        jCheckBoxShowPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxShowPassActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jCheckBoxShowPass);
+        jCheckBoxShowPass.setBounds(310, 130, 106, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,6 +135,14 @@ public class loginForm extends javax.swing.JFrame {
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabelCloseMouseClicked
+
+    private void jCheckBoxShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxShowPassActionPerformed
+        if(jCheckBoxShowPass.isSelected()){
+            jPasswordField1.setEchoChar((char)0);
+        } else {
+            jPasswordField1.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheckBoxShowPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +180,7 @@ public class loginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBoxShowPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
