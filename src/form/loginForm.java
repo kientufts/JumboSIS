@@ -6,6 +6,7 @@
 package form;
 
 import Connector.myConnection;
+import Utils.ImageUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -175,15 +176,15 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jCheckBoxShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxShowPassActionPerformed
-        if(jCheckBoxShowPass.isSelected()){
-            jPasswordField1.setEchoChar((char)0);
+        if (jCheckBoxShowPass.isSelected()) {
+            jPasswordField1.setEchoChar((char) 0);
         } else {
             jPasswordField1.setEchoChar('*');
         }
     }//GEN-LAST:event_jCheckBoxShowPassActionPerformed
 
     private void jLabelCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateAccountMouseClicked
-        signupForm supf =  new signupForm();
+        signupForm supf = new signupForm();
         supf.setVisible(true);
         supf.pack();
         supf.setLocationRelativeTo(null);
@@ -195,14 +196,22 @@ public class loginForm extends javax.swing.JFrame {
         Connection con = myConnection.getConnection();
         PreparedStatement ps;
         ResultSet rs;
-        
+
         try {
-            ps = con.prepareStatement("SELECT * FROM `user` WHERE `username` = ? AND `pass` =?");
+            ps = con.prepareStatement("SELECT `username`, `pass`, `pic` FROM `user` WHERE `username` = ? AND `pass` =?");
             ps.setString(1, jTextFieldUsername.getText());
             ps.setString(2, String.valueOf(jPasswordField1.getPassword()));
             rs = ps.executeQuery();
-            if (rs.next()){
-                JOptionPane.showMessageDialog(null, "Logged in success");
+            if (rs.next()) {
+                studentForm stdf = new studentForm();
+                stdf.setVisible(true);
+                stdf.pack();
+                stdf.setLocationRelativeTo(null);
+                stdf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                // show user profile picture in the top left of the form
+                stdf.jLabelUserPic.setIcon(new ImageUtil().resizePic(null, rs.getBytes(3), stdf.jLabelUserPic.getWidth(), stdf.jLabelUserPic.getHeight()));
+                stdf.jLabelUsername.setText(rs.getString(1));
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "The username or password you entered is incorrect");
             }

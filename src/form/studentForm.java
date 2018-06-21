@@ -30,8 +30,8 @@ public class studentForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
         jLabelMin = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelUserPic = new javax.swing.JLabel();
+        jLabelUsername = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -91,21 +91,21 @@ public class studentForm extends javax.swing.JFrame {
         jPanel1.add(jLabelMin);
         jLabelMin.setBounds(860, 10, 20, 30);
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 0));
-        jLabel2.setMaximumSize(new java.awt.Dimension(50, 50));
-        jLabel2.setMinimumSize(new java.awt.Dimension(50, 50));
-        jLabel2.setOpaque(true);
-        jLabel2.setPreferredSize(new java.awt.Dimension(50, 50));
-        jLabel2.setSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 0, 50, 50);
+        jLabelUserPic.setBackground(new java.awt.Color(255, 255, 0));
+        jLabelUserPic.setMaximumSize(new java.awt.Dimension(50, 50));
+        jLabelUserPic.setMinimumSize(new java.awt.Dimension(50, 50));
+        jLabelUserPic.setOpaque(true);
+        jLabelUserPic.setPreferredSize(new java.awt.Dimension(50, 50));
+        jLabelUserPic.setSize(new java.awt.Dimension(50, 50));
+        jPanel1.add(jLabelUserPic);
+        jLabelUserPic.setBounds(0, 0, 50, 50);
 
-        jLabel3.setBackground(new java.awt.Color(255, 204, 102));
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel3.setText("Username");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(60, 10, 80, 20);
+        jLabelUsername.setBackground(new java.awt.Color(255, 204, 102));
+        jLabelUsername.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabelUsername.setForeground(new java.awt.Color(255, 255, 204));
+        jLabelUsername.setText("Username");
+        jPanel1.add(jLabelUsername);
+        jLabelUsername.setBounds(60, 10, 110, 20);
 
         jLabel4.setText("First Name:");
 
@@ -115,7 +115,9 @@ public class studentForm extends javax.swing.JFrame {
 
         jLabel7.setText("Email:");
 
-        jLabel8.setText("Email:");
+        jLabel8.setText("Class:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Computer Science", "Eletrical Engineering", "Computer Engineering", "Maths" }));
 
         jLabel9.setText("Profile Picture:");
 
@@ -284,8 +286,6 @@ public class studentForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -295,6 +295,8 @@ public class studentForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelMin;
     private javax.swing.JLabel jLabelStudentPic;
+    public javax.swing.JLabel jLabelUserPic;
+    public javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
