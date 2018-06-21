@@ -3,7 +3,9 @@ package Student;
 import Connector.myConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,9 +45,37 @@ public class StudentQuery {
 
         return isInserted;
     }
-    
+
     // create a list of students
-    public ArrayList<Student> studentList(){
-        
+    public ArrayList<Student> studentList() {
+        ArrayList<Student> sList = new ArrayList<>();
+
+        Connection con = myConnection.getConnection();
+        Statement st;
+        ResultSet rs;
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT `id`, `fname`, `lname`, `class`, `phone`, `email`, `address`, `pic` FROM `student`");
+
+            Student std;
+
+            while (rs.next()) {
+                std = new Student(rs.getInt("id"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("class"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("address"),
+                        rs.getBytes("pic"),
+                        0);
+                
+                sList.add(std);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return sList;
     }
 }
