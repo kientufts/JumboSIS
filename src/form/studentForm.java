@@ -49,6 +49,7 @@ public class studentForm extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButtonBrowse = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jButtonAddStudent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(910, 376));
@@ -141,6 +142,15 @@ public class studentForm extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        jButtonAddStudent.setBackground(new java.awt.Color(51, 153, 255));
+        jButtonAddStudent.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAddStudent.setText("Add");
+        jButtonAddStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddStudentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,11 +189,13 @@ public class studentForm extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelStudentPic, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
@@ -226,6 +238,8 @@ public class studentForm extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -245,6 +259,36 @@ public class studentForm extends javax.swing.JFrame {
         imagePth = imgUtil.browseImage(jLabelStudentPic);
         System.out.println(imagePth);
     }//GEN-LAST:event_jButtonBrowseActionPerformed
+
+    private void jButtonAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddStudentActionPerformed
+        if (verifData()) {
+            Connection con = myConnection.getConnection();
+            PreparedStatement ps;
+
+            try {
+                ps = con.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `pass`, `pic`) VALUES (?,?,?,?,?)");
+                ps.setString(1, jTextFieldFName.getText());
+                ps.setString(2, jTextFieldLName.getText());
+                ps.setString(3, jTextFieldUsername.getText());
+                ps.setString(4, String.valueOf(jPasswordField1.getPassword()));
+
+                InputStream img = new FileInputStream(new File(imagePth));
+                ps.setBlob(5, img);
+                if (isUsernameExist(jTextFieldUsername.getText())) {
+                    JOptionPane.showMessageDialog(null, "The username is already existed");
+                } else {
+                    if (ps.executeUpdate() != 0) {
+                        JOptionPane.showMessageDialog(null, "Account Created");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Something Wrong");
+                    }
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonAddStudentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,6 +326,7 @@ public class studentForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddStudent;
     private javax.swing.JButton jButtonBrowse;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
