@@ -295,13 +295,13 @@ public class studentForm extends javax.swing.JFrame {
             rows[i][5] = stdList.get(i).getEmail();
             rows[i][6] = stdList.get(i).getAddress();
             
-            ImageIcon pic = new ImageIcon(new ImageIcon(stdList.get(i).getPic()).getImage().getScaledInstance(150, 100, Image.SCALE_SMOOTH));
+            ImageIcon pic = new ImageIcon(new ImageIcon(stdList.get(i).getPic()).getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH));
             
             rows[i][7] = pic;
             StudentModel stdModel = new StudentModel(rows, colNames);
             jTable1.setModel(stdModel);
-            jTable1.setRowHeight(100);
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(150);
+            jTable1.setRowHeight(40);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(70);
         }
     }
     
