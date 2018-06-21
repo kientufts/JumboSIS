@@ -40,6 +40,9 @@ public class loginForm extends javax.swing.JFrame {
         jTextFieldUsername = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jCheckBoxShowPass = new javax.swing.JCheckBox();
+        jButtoCancel = new javax.swing.JButton();
+        jButtonLogin = new javax.swing.JButton();
+        jLabelCreateAccount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -110,6 +113,28 @@ public class loginForm extends javax.swing.JFrame {
         jPanel3.add(jCheckBoxShowPass);
         jCheckBoxShowPass.setBounds(310, 130, 106, 23);
 
+        jButtoCancel.setBackground(new java.awt.Color(51, 153, 255));
+        jButtoCancel.setForeground(new java.awt.Color(255, 255, 255));
+        jButtoCancel.setText("Cancel");
+        jPanel3.add(jButtoCancel);
+        jButtoCancel.setBounds(110, 170, 80, 40);
+
+        jButtonLogin.setBackground(new java.awt.Color(51, 153, 255));
+        jButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonLogin.setText("Log In");
+        jPanel3.add(jButtonLogin);
+        jButtonLogin.setBounds(210, 170, 80, 40);
+
+        jLabelCreateAccount.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        jLabelCreateAccount.setText("new user? click here to create an account");
+        jLabelCreateAccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCreateAccountMouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabelCreateAccount);
+        jLabelCreateAccount.setBounds(90, 220, 270, 16);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,6 +168,15 @@ public class loginForm extends javax.swing.JFrame {
             jPasswordField1.setEchoChar('*');
         }
     }//GEN-LAST:event_jCheckBoxShowPassActionPerformed
+
+    private void jLabelCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateAccountMouseClicked
+        signupForm supf =  new signupForm();
+        supf.setVisible(true);
+        supf.pack();
+        supf.setLocationRelativeTo(null);
+        supf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabelCreateAccountMouseClicked
 
     /**
      * @param args the command line arguments
@@ -180,11 +214,14 @@ public class loginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtoCancel;
+    private javax.swing.JButton jButtonLogin;
     private javax.swing.JCheckBox jCheckBoxShowPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelClose;
+    private javax.swing.JLabel jLabelCreateAccount;
     private javax.swing.JLabel jLabelMin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
