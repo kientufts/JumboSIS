@@ -5,11 +5,20 @@
  */
 package form;
 
+import Connector.myConnection;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -21,6 +30,7 @@ public class signupForm extends javax.swing.JFrame {
     /**
      * Creates new form signupForm
      */
+    String imagePth=null;
     public signupForm() {
         initComponents();
     }
@@ -114,6 +124,11 @@ public class signupForm extends javax.swing.JFrame {
         jButtonCreate.setBackground(new java.awt.Color(51, 153, 255));
         jButtonCreate.setForeground(new java.awt.Color(255, 255, 255));
         jButtonCreate.setText("Create");
+        jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateActionPerformed(evt);
+            }
+        });
 
         jLabelCreateAccount.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         jLabelCreateAccount.setText("already have an account? click here to log in");
@@ -307,7 +322,7 @@ public class signupForm extends javax.swing.JFrame {
         if (fileState == JFileChooser.APPROVE_OPTION){
             File selectedFile = filec.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
-            
+            imagePth = path;
             //display the image in the jlabel using resized image
             jLabelPic.setIcon(resizePic(path));
 //            jLabelPic.setIcon(new ImageIcon(path));
@@ -316,6 +331,29 @@ public class signupForm extends javax.swing.JFrame {
             System.out.println("No Image Selected");
         }
     }//GEN-LAST:event_jButtonBrowseActionPerformed
+
+    private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
+        Connection con = myConnection.getConnection();
+        PreparedStatement ps;
+        
+        try {
+            ps = con.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `pass`, `pic`) VALUES (?,?,?,?,?)");
+            ps.setString(1, jTextFieldName.getText());
+            ps.setString(2, jTextFieldLName.getText());
+            ps.setString(3, jTextFieldUsername.getText());
+            ps.setString(4, String.valueOf(jPasswordField1.getPassword()));
+            
+            InputStream img = new FileInputStream(new File(imagePth));
+            ps.setBlob(5, img);
+            if(ps.executeUpdate() != 0){
+                JOptionPane.showMessageDialog(null, "Account Created");
+            } else {
+                JOptionPane.showMessageDialog(null, "Something Wrong");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonCreateActionPerformed
 
     /**
      * @param args the command line arguments
