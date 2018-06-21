@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class StudentQuery {
 
-    public boolean insertStudent(Student std) {
-        boolean isInserted = true;
+    public void insertStudent(Student std) {
+
         Connection con = myConnection.getConnection();
         PreparedStatement ps;
         try {
@@ -34,16 +34,71 @@ public class StudentQuery {
 
             if (ps.executeUpdate() != 0) {
                 JOptionPane.showMessageDialog(null, "New Student Added");
-                isInserted = true;
+
             } else {
                 JOptionPane.showMessageDialog(null, "Something Wrong");
-                isInserted = false;
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return isInserted;
+    }
+
+    public void updateStudent(Student std, boolean withImage) {
+
+        Connection con = myConnection.getConnection();
+        PreparedStatement ps;
+        String updateQuery = "";
+        if (withImage == true) //if the user want to update student profile picture
+        {
+            updateQuery = "UPDATE `student` SET `fname`=?,`lname`=?,`class`=?,`phone`=?,`email`=?,`address`=?,`pic`=? WHERE `id`=?";
+            try {
+                ps = con.prepareStatement(updateQuery);
+                ps.setString(1, std.getFname());
+                ps.setString(2, std.getLname());
+                ps.setString(3, std.getClassS());
+                ps.setString(4, std.getPhone());
+                ps.setString(5, std.getEmail());
+                ps.setString(6, std.getAddress());
+                ps.setBytes(7, std.getPic());
+                ps.setInt(8, std.getSid());
+
+                if (ps.executeUpdate() != 0) {
+                    JOptionPane.showMessageDialog(null, "Student Info Updated");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Something Wrong");
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentQuery.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } // the user want to keep the current picture (remove the pic from the update)
+        else {
+            updateQuery = "UPDATE `student` SET `fname`=?,`lname`=?,`class`=?,`phone`=?,`email`=?,`address`=? WHERE `id`=?";
+            try {
+                ps = con.prepareStatement(updateQuery);
+                ps.setString(1, std.getFname());
+                ps.setString(2, std.getLname());
+                ps.setString(3, std.getClassS());
+                ps.setString(4, std.getPhone());
+                ps.setString(5, std.getEmail());
+                ps.setString(6, std.getAddress());
+                ps.setInt(7, std.getSid());
+
+                if (ps.executeUpdate() != 0) {
+                    JOptionPane.showMessageDialog(null, "Student Info Updated");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Something Wrong");
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentQuery.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
     // create a list of students
@@ -69,7 +124,7 @@ public class StudentQuery {
                         rs.getString("address"),
                         rs.getBytes("pic"),
                         userId);
-                
+
                 sList.add(std);
             }
         } catch (SQLException ex) {

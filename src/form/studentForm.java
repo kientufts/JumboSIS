@@ -78,6 +78,7 @@ public class studentForm extends javax.swing.JFrame {
         jButtonAddStudent = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButtonEditStudent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(910, 376));
@@ -197,6 +198,15 @@ public class studentForm extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        jButtonEditStudent.setBackground(new java.awt.Color(51, 153, 255));
+        jButtonEditStudent.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEditStudent.setText("Edit");
+        jButtonEditStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditStudentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,7 +250,10 @@ public class studentForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButtonEditStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(23, 23, 23)
+                            .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -288,7 +301,9 @@ public class studentForm extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addComponent(jComboBoxClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -376,6 +391,30 @@ public class studentForm extends javax.swing.JFrame {
         jLabelStudentPic.setIcon(img);
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButtonEditStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditStudentActionPerformed
+        String fname = jTextFieldFname.getText();
+        String lname = jTextFieldLname.getText();
+        String phone = jTextFieldPhone.getText();
+        String email = jTextFieldEmail.getText();
+        String address = jTextAreaAddress.getText();
+        String classS = jComboBoxClass.getSelectedItem().toString();
+        byte[] img = null;
+        try {
+            
+            Path pth = Paths.get(imagePth);
+            img = Files.readAllBytes(pth);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Student std = new Student(null, fname, lname, classS, phone, email, address, img, currentUserId);
+        
+        StudentQuery stdQ = new StudentQuery();
+        stdQ.insertStudent(std);
+    }//GEN-LAST:event_jButtonEditStudentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -414,6 +453,7 @@ public class studentForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddStudent;
     private javax.swing.JButton jButtonBrowse;
+    private javax.swing.JButton jButtonEditStudent;
     private javax.swing.JComboBox<String> jComboBoxClass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
