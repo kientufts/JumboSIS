@@ -5,7 +5,15 @@
  */
 package form;
 
+import Connector.myConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -122,6 +130,11 @@ public class loginForm extends javax.swing.JFrame {
         jButtonLogin.setBackground(new java.awt.Color(51, 153, 255));
         jButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLogin.setText("Log In");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonLogin);
         jButtonLogin.setBounds(210, 170, 80, 40);
 
@@ -177,6 +190,26 @@ public class loginForm extends javax.swing.JFrame {
         supf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabelCreateAccountMouseClicked
+
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        Connection con = myConnection.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = con.prepareStatement("SELECT * FROM `user` WHERE `username` = ? AND `pass` =?");
+            ps.setString(1, jTextFieldUsername.getText());
+            ps.setString(2, String.valueOf(jPasswordField1.getPassword()));
+            rs = ps.executeQuery();
+            if (rs.next()){
+                JOptionPane.showMessageDialog(null, "Logged in success");
+            } else {
+                JOptionPane.showMessageDialog(null, "The username or password you entered is incorrect");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(loginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments
