@@ -198,11 +198,14 @@ public class loginForm extends javax.swing.JFrame {
         ResultSet rs;
 
         try {
-            ps = con.prepareStatement("SELECT `username`, `pass`, `pic` FROM `user` WHERE `username` = ? AND `pass` =?");
+            ps = con.prepareStatement("SELECT `username`, `pass`, `pic`, id FROM `user` WHERE `username` = ? AND `pass` =?");
             ps.setString(1, jTextFieldUsername.getText());
             ps.setString(2, String.valueOf(jPasswordField1.getPassword()));
             rs = ps.executeQuery();
             if (rs.next()) {
+                // get the current user id
+                studentForm.currentUserId = rs.getInt("id");
+                System.out.println(rs.getInt("id") + "From Login");
                 studentForm stdf = new studentForm();
                 stdf.setVisible(true);
                 stdf.pack();

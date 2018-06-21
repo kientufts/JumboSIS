@@ -29,6 +29,7 @@ public class studentForm extends javax.swing.JFrame {
      * Creates new form studentForm
      */
     String imagePth=null;
+    public static int currentUserId;
     public studentForm() {
         initComponents();
         
@@ -38,6 +39,8 @@ public class studentForm extends javax.swing.JFrame {
         JTableHeader th = jTable1.getTableHeader();
         th.setForeground(Color.BLUE);
         th.setFont(new Font("Tahoma", Font.BOLD, 12));
+        
+        System.out.println(currentUserId + "From Student");
     }
 
     /**
@@ -291,7 +294,7 @@ public class studentForm extends javax.swing.JFrame {
 
     public void populateJTable(){
         StudentQuery stdQ = new StudentQuery();
-        ArrayList<Student> stdList = stdQ.studentList();
+        ArrayList<Student> stdList = stdQ.studentList(currentUserId);
         String[] colNames={"Id", "First Name", "Last Name", "Class", "Phone", "Email", "Address", "Image"};
         Object[][] rows = new Object[stdList.size()][8];
         

@@ -47,7 +47,7 @@ public class StudentQuery {
     }
 
     // create a list of students
-    public ArrayList<Student> studentList() {
+    public ArrayList<Student> studentList(int userId) {
         ArrayList<Student> sList = new ArrayList<>();
 
         Connection con = myConnection.getConnection();
@@ -55,7 +55,7 @@ public class StudentQuery {
         ResultSet rs;
         try {
             st = con.createStatement();
-            rs = st.executeQuery("SELECT `id`, `fname`, `lname`, `class`, `phone`, `email`, `address`, `pic` FROM `student`");
+            rs = st.executeQuery("SELECT `id`, `fname`, `lname`, `class`, `phone`, `email`, `address`, `pic` FROM `student` WHERE userid = " + userId);
 
             Student std;
 
