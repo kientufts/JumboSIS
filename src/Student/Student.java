@@ -5,7 +5,7 @@ package Student;
  * @author kienle
  */
 public class Student {
-    private int sid;
+    private Integer sid;
     private String fname;
     private String lname;
     private String classS;
@@ -18,7 +18,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(int sid, String fname, String lname, String classS, String phone, String email, String address, byte[] pic, int uid) {
+    public Student(Integer sid, String fname, String lname, String classS, String phone, String email, String address, byte[] pic, int uid) {
         this.sid = sid;
         this.fname = fname;
         this.lname = lname;

@@ -44,5 +44,10 @@ public class StudentModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         return this.rows[rowIndex][columnIndex];
     }
+    
+    @Override
+    public String getColumnName(int col){
+        return this.columns[col];
+    }
 
 }
