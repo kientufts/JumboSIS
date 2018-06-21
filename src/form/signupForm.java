@@ -6,7 +6,7 @@
 package form;
 
 import Connector.myConnection;
-import java.awt.Image;
+import Utils.ImageUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -16,11 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -328,35 +325,17 @@ public class signupForm extends javax.swing.JFrame {
         return isExist;
     }
 
-    public ImageIcon resizePic(String picPath) {
-        ImageIcon myImg = new ImageIcon(picPath);
-        Image img = myImg.getImage().getScaledInstance(jLabelPic.getWidth(), jLabelPic.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon myPic = new ImageIcon(img);
-        return myPic;
-    }
+//    public ImageIcon resizePic(String picPath) {
+//        ImageIcon myImg = new ImageIcon(picPath);
+//        Image img = myImg.getImage().getScaledInstance(jLabelPic.getWidth(), jLabelPic.getHeight(), Image.SCALE_SMOOTH);
+//        ImageIcon myPic = new ImageIcon(img);
+//        return myPic;
+//    }
 
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
-        JFileChooser filec = new JFileChooser();
-        filec.setCurrentDirectory(new File(System.getProperty("user.home")));
-
-        //file extension
-        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images", "jpg", "png", "gif");
-        filec.addChoosableFileFilter(fileFilter);
-
-        int fileState = filec.showSaveDialog(null);
-
-        //if user select a file
-        if (fileState == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = filec.getSelectedFile();
-            String path = selectedFile.getAbsolutePath();
-            imagePth = path;
-            //display the image in the jlabel using resized image
-            jLabelPic.setIcon(resizePic(path));
-//            jLabelPic.setIcon(new ImageIcon(path));
-        } else if (fileState == JFileChooser.CANCEL_OPTION) {
-            // if user cancel
-            System.out.println("No Image Selected");
-        }
+        
+        ImageUtil imgUtil = new ImageUtil();
+        imagePth = imgUtil.browseImage(jLabelPic);
     }//GEN-LAST:event_jButtonBrowseActionPerformed
 
     public boolean verifData() {
