@@ -354,7 +354,7 @@ public class studentForm extends javax.swing.JFrame {
             Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Student std = new Student(null, fname, lname, classS, phone, email, address, img, 0);
+        Student std = new Student(null, fname, lname, classS, phone, email, address, img, currentUserId);
         
         StudentQuery stdQ = new StudentQuery();
         stdQ.insertStudent(std);

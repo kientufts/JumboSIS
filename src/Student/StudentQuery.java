@@ -68,7 +68,7 @@ public class StudentQuery {
                         rs.getString("email"),
                         rs.getString("address"),
                         rs.getBytes("pic"),
-                        0);
+                        userId);
                 
                 sList.add(std);
             }
