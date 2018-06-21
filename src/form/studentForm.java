@@ -4,6 +4,8 @@ import Student.Student;
 import Student.StudentModel;
 import Student.StudentQuery;
 import Utils.ImageUtil;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -28,7 +31,13 @@ public class studentForm extends javax.swing.JFrame {
     String imagePth=null;
     public studentForm() {
         initComponents();
+        
         populateJTable();
+        jTable1.setShowGrid(true);
+        jTable1.setSelectionBackground(Color.lightGray);
+        JTableHeader th = jTable1.getTableHeader();
+        th.setForeground(Color.BLUE);
+        th.setFont(new Font("Tahoma", Font.BOLD, 12));
     }
 
     /**
