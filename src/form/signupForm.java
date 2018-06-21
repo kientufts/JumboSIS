@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -308,12 +309,32 @@ public class signupForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabelCreateAccountMouseClicked
 
+    public boolean isUsernameExist(String un) {
+        boolean isExist = false;
+        Connection con = myConnection.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement("SELECT * FROM `user` WHERE `username` = ?");
+            ps.setString(1, jTextFieldUsername.getText());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                isExist = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(loginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isExist;
+    }
+
     public ImageIcon resizePic(String picPath) {
         ImageIcon myImg = new ImageIcon(picPath);
         Image img = myImg.getImage().getScaledInstance(jLabelPic.getWidth(), jLabelPic.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon myPic = new ImageIcon(img);
         return myPic;
     }
+
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
         JFileChooser filec = new JFileChooser();
         filec.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -373,11 +394,16 @@ public class signupForm extends javax.swing.JFrame {
 
                 InputStream img = new FileInputStream(new File(imagePth));
                 ps.setBlob(5, img);
-                if (ps.executeUpdate() != 0) {
-                    JOptionPane.showMessageDialog(null, "Account Created");
+                if (isUsernameExist(jTextFieldUsername.getText())) {
+                    JOptionPane.showMessageDialog(null, "The username is already existed");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Something Wrong");
+                    if (ps.executeUpdate() != 0) {
+                        JOptionPane.showMessageDialog(null, "Account Created");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Something Wrong");
+                    }
                 }
+
             } catch (Exception ex) {
                 Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
             }
