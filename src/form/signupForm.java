@@ -5,7 +5,12 @@
  */
 package form;
 
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -142,6 +147,11 @@ public class signupForm extends javax.swing.JFrame {
         jButtonBrowse.setBackground(new java.awt.Color(51, 153, 255));
         jButtonBrowse.setForeground(new java.awt.Color(255, 255, 255));
         jButtonBrowse.setText("Browse");
+        jButtonBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -276,6 +286,36 @@ public class signupForm extends javax.swing.JFrame {
         logf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabelCreateAccountMouseClicked
+
+    public ImageIcon resizePic(String picPath){
+        ImageIcon myImg = new ImageIcon(picPath);
+        Image img = myImg.getImage().getScaledInstance(jLabelPic.getWidth(), jLabelPic.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon myPic = new ImageIcon(img);
+        return myPic;
+    }
+    private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
+        JFileChooser filec = new JFileChooser();
+        filec.setCurrentDirectory(new File(System.getProperty("user.home")));
+        
+        //file extension
+        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images", "jpg","png","gif");
+        filec.addChoosableFileFilter(fileFilter);
+        
+        int fileState = filec.showSaveDialog(null);
+        
+        //if user select a file
+        if (fileState == JFileChooser.APPROVE_OPTION){
+            File selectedFile = filec.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            
+            //display the image in the jlabel using resized image
+            jLabelPic.setIcon(resizePic(path));
+//            jLabelPic.setIcon(new ImageIcon(path));
+        } else if (fileState == JFileChooser.CANCEL_OPTION){
+            // if user cancel
+            System.out.println("No Image Selected");
+        }
+    }//GEN-LAST:event_jButtonBrowseActionPerformed
 
     /**
      * @param args the command line arguments
