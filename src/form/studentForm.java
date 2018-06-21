@@ -190,6 +190,11 @@ public class studentForm extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -285,8 +290,8 @@ public class studentForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -354,6 +359,22 @@ public class studentForm extends javax.swing.JFrame {
         StudentQuery stdQ = new StudentQuery();
         stdQ.insertStudent(std);
     }//GEN-LAST:event_jButtonAddStudentActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // display selected Jtable row data
+        
+        // get selected row index
+        int rowIndex = jTable1.getSelectedRow();
+        jTextFieldFname.setText(jTable1.getValueAt(rowIndex, 1).toString());
+        jTextFieldLname.setText(jTable1.getValueAt(rowIndex, 2).toString());
+        jComboBoxClass.setSelectedItem(jTable1.getValueAt(rowIndex, 3).toString());
+        jTextFieldPhone.setText(jTable1.getValueAt(rowIndex, 4).toString());
+        jTextFieldEmail.setText(jTable1.getValueAt(rowIndex, 5).toString());
+        jTextAreaAddress.setText(jTable1.getValueAt(rowIndex, 6).toString());
+        Image pic = ((ImageIcon) jTable1.getValueAt(rowIndex, 7)).getImage().getScaledInstance(jLabelStudentPic.getWidth(), jLabelStudentPic.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon img = new ImageIcon(pic);
+        jLabelStudentPic.setIcon(img);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
