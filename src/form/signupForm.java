@@ -30,7 +30,8 @@ public class signupForm extends javax.swing.JFrame {
     /**
      * Creates new form signupForm
      */
-    String imagePth=null;
+    String imagePth = null;
+
     public signupForm() {
         initComponents();
     }
@@ -56,7 +57,7 @@ public class signupForm extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
         jButtonCreate = new javax.swing.JButton();
         jLabelCreateAccount = new javax.swing.JLabel();
-        jTextFieldName = new javax.swing.JTextField();
+        jTextFieldFName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldUsername = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -120,6 +121,11 @@ public class signupForm extends javax.swing.JFrame {
         jButtonCancel.setBackground(new java.awt.Color(51, 153, 255));
         jButtonCancel.setForeground(new java.awt.Color(255, 255, 255));
         jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
 
         jButtonCreate.setBackground(new java.awt.Color(51, 153, 255));
         jButtonCreate.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +144,7 @@ public class signupForm extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldName.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jTextFieldFName.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel4.setText("First Name:");
@@ -180,7 +186,7 @@ public class signupForm extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(80, 80, 80)
-                                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextFieldFName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +238,7 @@ public class signupForm extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -294,7 +300,7 @@ public class signupForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelMinMouseClicked
 
     private void jLabelCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateAccountMouseClicked
-        loginForm logf =  new loginForm();
+        loginForm logf = new loginForm();
         logf.setVisible(true);
         logf.pack();
         logf.setLocationRelativeTo(null);
@@ -302,7 +308,7 @@ public class signupForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabelCreateAccountMouseClicked
 
-    public ImageIcon resizePic(String picPath){
+    public ImageIcon resizePic(String picPath) {
         ImageIcon myImg = new ImageIcon(picPath);
         Image img = myImg.getImage().getScaledInstance(jLabelPic.getWidth(), jLabelPic.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon myPic = new ImageIcon(img);
@@ -311,49 +317,76 @@ public class signupForm extends javax.swing.JFrame {
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
         JFileChooser filec = new JFileChooser();
         filec.setCurrentDirectory(new File(System.getProperty("user.home")));
-        
+
         //file extension
-        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images", "jpg","png","gif");
+        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images", "jpg", "png", "gif");
         filec.addChoosableFileFilter(fileFilter);
-        
+
         int fileState = filec.showSaveDialog(null);
-        
+
         //if user select a file
-        if (fileState == JFileChooser.APPROVE_OPTION){
+        if (fileState == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filec.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
             imagePth = path;
             //display the image in the jlabel using resized image
             jLabelPic.setIcon(resizePic(path));
 //            jLabelPic.setIcon(new ImageIcon(path));
-        } else if (fileState == JFileChooser.CANCEL_OPTION){
+        } else if (fileState == JFileChooser.CANCEL_OPTION) {
             // if user cancel
             System.out.println("No Image Selected");
         }
     }//GEN-LAST:event_jButtonBrowseActionPerformed
 
+    public boolean verifData() {
+        // if both first name and last name are empty or either of usename or password are empty
+        if (jTextFieldFName.getText().equals("") && jTextFieldLName.getText().equals("")
+                || jTextFieldUsername.getText().equals("")
+                || String.valueOf(jPasswordField1.getPassword()).equals("")) {
+            JOptionPane.showMessageDialog(null, "One or more fields are empty");
+            return false;
+        } // if the two passwords are not a match
+        else if (!String.valueOf(jPasswordField1.getPassword()).equals(String.valueOf(jPasswordField2.getPassword()))) {
+            JOptionPane.showMessageDialog(null, "Passwords are not a match");
+            return false;
+        } // if no image was selected
+        else if (imagePth == null) {
+            JOptionPane.showMessageDialog(null, "No image selected");
+            return false;
+        } // else everything is filled
+        else {
+            return true;
+        }
+    }
+
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
-        Connection con = myConnection.getConnection();
-        PreparedStatement ps;
-        
-        try {
-            ps = con.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `pass`, `pic`) VALUES (?,?,?,?,?)");
-            ps.setString(1, jTextFieldName.getText());
-            ps.setString(2, jTextFieldLName.getText());
-            ps.setString(3, jTextFieldUsername.getText());
-            ps.setString(4, String.valueOf(jPasswordField1.getPassword()));
-            
-            InputStream img = new FileInputStream(new File(imagePth));
-            ps.setBlob(5, img);
-            if(ps.executeUpdate() != 0){
-                JOptionPane.showMessageDialog(null, "Account Created");
-            } else {
-                JOptionPane.showMessageDialog(null, "Something Wrong");
+        if (verifData()) {
+            Connection con = myConnection.getConnection();
+            PreparedStatement ps;
+
+            try {
+                ps = con.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `pass`, `pic`) VALUES (?,?,?,?,?)");
+                ps.setString(1, jTextFieldFName.getText());
+                ps.setString(2, jTextFieldLName.getText());
+                ps.setString(3, jTextFieldUsername.getText());
+                ps.setString(4, String.valueOf(jPasswordField1.getPassword()));
+
+                InputStream img = new FileInputStream(new File(imagePth));
+                ps.setBlob(5, img);
+                if (ps.executeUpdate() != 0) {
+                    JOptionPane.showMessageDialog(null, "Account Created");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Something Wrong");
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,8 +442,8 @@ public class signupForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JTextField jTextFieldFName;
     private javax.swing.JTextField jTextFieldLName;
-    private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
 }
