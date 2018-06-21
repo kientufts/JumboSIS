@@ -1,18 +1,19 @@
 package form;
 
 import Student.Student;
+import Student.StudentModel;
 import Student.StudentQuery;
 import Utils.ImageUtil;
-import java.io.File;
-import java.io.FileInputStream;
+import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -27,6 +28,7 @@ public class studentForm extends javax.swing.JFrame {
     String imagePth=null;
     public studentForm() {
         initComponents();
+        populateJTable();
     }
 
     /**
@@ -62,6 +64,8 @@ public class studentForm extends javax.swing.JFrame {
         jButtonBrowse = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonAddStudent = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(910, 376));
@@ -163,6 +167,19 @@ public class studentForm extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,6 +226,9 @@ public class studentForm extends javax.swing.JFrame {
                         .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,12 +272,39 @@ public class studentForm extends javax.swing.JFrame {
                                 .addComponent(jComboBoxClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populateJTable(){
+        StudentQuery stdQ = new StudentQuery();
+        ArrayList<Student> stdList = stdQ.studentList();
+        String[] colNames={"Id", "First Name", "Last Name", "Class", "Phone", "Email", "Address", "Image"};
+        Object[][] rows = new Object[stdList.size()][8];
+        
+        for (int i = 0; i < stdList.size(); i++){
+            rows[i][0] = stdList.get(i).getSid();
+            rows[i][1] = stdList.get(i).getFname();
+            rows[i][2] = stdList.get(i).getLname();
+            rows[i][3] = stdList.get(i).getClassS();
+            rows[i][4] = stdList.get(i).getPhone();
+            rows[i][5] = stdList.get(i).getEmail();
+            rows[i][6] = stdList.get(i).getAddress();
+            
+            ImageIcon pic = new ImageIcon(new ImageIcon(stdList.get(i).getPic()).getImage().getScaledInstance(150, 100, Image.SCALE_SMOOTH));
+            
+            rows[i][7] = pic;
+            StudentModel stdModel = new StudentModel(rows, colNames);
+            jTable1.setModel(stdModel);
+            jTable1.setRowHeight(100);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(150);
+        }
+    }
+    
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabelCloseMouseClicked
@@ -350,7 +397,9 @@ public class studentForm extends javax.swing.JFrame {
     public javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaAddress;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldFname;
