@@ -139,7 +139,7 @@
                               <Component id="jLabel4" min="-2" pref="100" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldUsername1" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldName" min="-2" pref="210" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -148,7 +148,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldUsername" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldLName" min="-2" pref="210" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel3" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
@@ -158,7 +158,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldUsername2" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldUsername" min="-2" pref="210" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel5" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
@@ -181,9 +181,9 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
-                          <Component id="jButtoCancel" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jButtonCancel" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                          <Component id="jButtonLogin" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jButtonCreate" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="90" pref="90" max="-2" attributes="0"/>
@@ -193,9 +193,9 @@
                           <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" pref="210" max="-2" attributes="0"/>
+                          <Component id="jLabelPic" min="-2" pref="210" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="jButtonBrowse" min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -211,17 +211,17 @@
                           <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jTextFieldUsername1" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jTextFieldName" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextFieldUsername" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jTextFieldLName" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextFieldUsername2" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jTextFieldUsername" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" pref="22" max="-2" attributes="0"/>
@@ -244,13 +244,13 @@
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jLabel8" min="-2" pref="130" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPic" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="jButtonBrowse" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButtoCancel" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButtonLogin" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jButtonCreate" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabelCreateAccount" min="-2" pref="16" max="-2" attributes="0"/>
@@ -276,7 +276,7 @@
             <Property name="text" type="java.lang.String" value="Last Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldUsername">
+        <Component class="javax.swing.JTextField" name="jTextFieldLName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Grande" size="18" style="0"/>
@@ -290,7 +290,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtoCancel">
+        <Component class="javax.swing.JButton" name="jButtonCancel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -301,7 +301,7 @@
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonLogin">
+        <Component class="javax.swing.JButton" name="jButtonCreate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -323,7 +323,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelCreateAccountMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldUsername1">
+        <Component class="javax.swing.JTextField" name="jTextFieldName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Grande" size="18" style="0"/>
@@ -338,7 +338,7 @@
             <Property name="text" type="java.lang.String" value="First Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldUsername2">
+        <Component class="javax.swing.JTextField" name="jTextFieldUsername">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Grande" size="18" style="0"/>
@@ -376,7 +376,7 @@
             <Property name="text" type="java.lang.String" value="Retype Pass:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="jLabelPic">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -384,7 +384,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jButtonBrowse">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="33" type="rgb"/>
