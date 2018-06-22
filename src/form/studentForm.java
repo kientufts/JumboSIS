@@ -398,6 +398,7 @@ public class studentForm extends javax.swing.JFrame {
         StudentQuery stdQ = new StudentQuery();
         stdQ.insertStudent(std);
         refreshJtable();
+        clearFields();
     }//GEN-LAST:event_jButtonAddStudentActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -438,6 +439,7 @@ public class studentForm extends javax.swing.JFrame {
                 StudentQuery stdQ = new StudentQuery();
                 stdQ.updateStudent(std, true);
                 refreshJtable();
+                clearFields();
             } catch (IOException ex) {
                 Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -447,6 +449,7 @@ public class studentForm extends javax.swing.JFrame {
             StudentQuery stdQ = new StudentQuery();
             stdQ.updateStudent(std, false);
             refreshJtable();
+            clearFields();
         }
 
 
@@ -457,11 +460,23 @@ public class studentForm extends javax.swing.JFrame {
         StudentQuery stdQ = new StudentQuery();
         stdQ.deleteStudent(id);
         refreshJtable();
+        clearFields();
     }//GEN-LAST:event_jButtonDeleteStudentActionPerformed
 
     public void refreshJtable() {
         jTable1.setModel(new DefaultTableModel());
         populateJTable();
+    }
+    
+    public void clearFields(){
+        jTextFieldId.setText("");
+        jTextFieldFname.setText("");
+        jTextFieldLname.setText("");
+        jTextFieldEmail.setText("");
+        jTextFieldPhone.setText("");
+        jTextAreaAddress.setText("");
+        jComboBoxClass.setSelectedItem(0);
+        jLabelStudentPic.setIcon(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
