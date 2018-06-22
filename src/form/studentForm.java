@@ -7,7 +7,6 @@ import Utils.ImageUtil;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -214,6 +213,8 @@ public class studentForm extends javax.swing.JFrame {
         });
 
         jLabel10.setText("ID:");
+
+        jTextFieldId.setEditable(false);
 
         jButtonDeleteStudent.setBackground(new java.awt.Color(51, 153, 255));
         jButtonDeleteStudent.setForeground(new java.awt.Color(255, 255, 255));
@@ -424,48 +425,57 @@ public class studentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButtonEditStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditStudentActionPerformed
-        int id = Integer.valueOf(jTextFieldId.getText());
-        String fname = jTextFieldFname.getText();
-        String lname = jTextFieldLname.getText();
-        String phone = jTextFieldPhone.getText();
-        String email = jTextFieldEmail.getText();
-        String address = jTextAreaAddress.getText();
-        String classS = jComboBoxClass.getSelectedItem().toString();
-        // if the user want to update data and the profile pic
-        if (imagePth != null) {
-            byte[] img = null;
-            try {
+        // user must select a student to edit
+        if (!jTextFieldId.getText().equals("")) {
+            int id = Integer.valueOf(jTextFieldId.getText());
+            String fname = jTextFieldFname.getText();
+            String lname = jTextFieldLname.getText();
+            String phone = jTextFieldPhone.getText();
+            String email = jTextFieldEmail.getText();
+            String address = jTextAreaAddress.getText();
+            String classS = jComboBoxClass.getSelectedItem().toString();
+            // if the user want to update data and the profile pic
+            if (imagePth != null) {
+                byte[] img = null;
+                try {
 
-                Path pth = Paths.get(imagePth);
-                img = Files.readAllBytes(pth);
+                    Path pth = Paths.get(imagePth);
+                    img = Files.readAllBytes(pth);
 
-                Student std = new Student(id, fname, lname, classS, phone, email, address, img, currentUserId);
+                    Student std = new Student(id, fname, lname, classS, phone, email, address, img, currentUserId);
+
+                    StudentQuery stdQ = new StudentQuery();
+                    stdQ.updateStudent(std, true);
+                    refreshJtable();
+                    clearFields();
+                } catch (IOException ex) {
+                    Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Student std = new Student(id, fname, lname, classS, phone, email, address, null, currentUserId);
 
                 StudentQuery stdQ = new StudentQuery();
-                stdQ.updateStudent(std, true);
+                stdQ.updateStudent(std, false);
                 refreshJtable();
                 clearFields();
-            } catch (IOException ex) {
-                Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            Student std = new Student(id, fname, lname, classS, phone, email, address, null, currentUserId);
-
-            StudentQuery stdQ = new StudentQuery();
-            stdQ.updateStudent(std, false);
-            refreshJtable();
-            clearFields();
+            JOptionPane.showMessageDialog(null, "Select a student to edit");
         }
-
-
     }//GEN-LAST:event_jButtonEditStudentActionPerformed
 
     private void jButtonDeleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteStudentActionPerformed
-        int id = Integer.valueOf(jTextFieldId.getText());
-        StudentQuery stdQ = new StudentQuery();
-        stdQ.deleteStudent(id);
-        refreshJtable();
-        clearFields();
+        // user must select a student to delete
+        if (!jTextFieldId.getText().equals("")) {
+            int id = Integer.valueOf(jTextFieldId.getText());
+            StudentQuery stdQ = new StudentQuery();
+            stdQ.deleteStudent(id);
+            refreshJtable();
+            clearFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a student to delete");
+        }
+
     }//GEN-LAST:event_jButtonDeleteStudentActionPerformed
 
     public void refreshJtable() {
@@ -482,6 +492,7 @@ public class studentForm extends javax.swing.JFrame {
         jTextAreaAddress.setText("");
         jComboBoxClass.setSelectedItem(0);
         jLabelStudentPic.setIcon(null);
+        // set image path to null ater clear fields to prevent unwanted duplicates
         imagePth = null;
     }
 
