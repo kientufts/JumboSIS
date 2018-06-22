@@ -91,6 +91,7 @@ public class studentForm extends javax.swing.JFrame {
         jButtonLast = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 255, 204));
         setMaximumSize(new java.awt.Dimension(910, 376));
         setMinimumSize(new java.awt.Dimension(910, 376));
         setUndecorated(true);
