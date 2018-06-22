@@ -101,6 +101,27 @@ public class StudentQuery {
 
     }
 
+    public void deleteStudent(int sid) {
+
+        Connection con = myConnection.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement("DELETE FROM `student` WHERE `id` = ?");
+            ps.setInt(1, sid);
+
+            if (ps.executeUpdate() != 0) {
+                JOptionPane.showMessageDialog(null, "Student Deleted");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Something Wrong");
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     // create a list of students
     public ArrayList<Student> studentList(int userId) {
         ArrayList<Student> sList = new ArrayList<>();
