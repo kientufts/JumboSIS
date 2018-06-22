@@ -28,18 +28,19 @@ public class studentForm extends javax.swing.JFrame {
     /**
      * Creates new form studentForm
      */
-    String imagePth=null;
+    String imagePth = null;
     public static int currentUserId;
+
     public studentForm() {
         initComponents();
-        
+
         populateJTable();
         jTable1.setShowGrid(true);
         jTable1.setSelectionBackground(Color.lightGray);
         JTableHeader th = jTable1.getTableHeader();
         th.setForeground(Color.BLUE);
         th.setFont(new Font("Tahoma", Font.BOLD, 12));
-        
+
         System.out.println(currentUserId + "From Student");
     }
 
@@ -79,6 +80,8 @@ public class studentForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButtonEditStudent = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(910, 376));
@@ -207,6 +210,8 @@ public class studentForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("ID:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,7 +220,7 @@ public class studentForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -236,7 +241,11 @@ public class studentForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxClass, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
@@ -268,42 +277,47 @@ public class studentForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonBrowse)
-                                    .addComponent(jLabelStudentPic, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel9)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButtonBrowse)
+                                            .addComponent(jLabelStudentPic, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonEditStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldFname, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldFname, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldLname, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(jComboBoxClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldLname, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBoxClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -312,13 +326,13 @@ public class studentForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populateJTable(){
+    public void populateJTable() {
         StudentQuery stdQ = new StudentQuery();
         ArrayList<Student> stdList = stdQ.studentList(currentUserId);
-        String[] colNames={"Id", "First Name", "Last Name", "Class", "Phone", "Email", "Address", "Image"};
+        String[] colNames = {"Id", "First Name", "Last Name", "Class", "Phone", "Email", "Address", "Image"};
         Object[][] rows = new Object[stdList.size()][8];
-        
-        for (int i = 0; i < stdList.size(); i++){
+
+        for (int i = 0; i < stdList.size(); i++) {
             rows[i][0] = stdList.get(i).getSid();
             rows[i][1] = stdList.get(i).getFname();
             rows[i][2] = stdList.get(i).getLname();
@@ -326,9 +340,9 @@ public class studentForm extends javax.swing.JFrame {
             rows[i][4] = stdList.get(i).getPhone();
             rows[i][5] = stdList.get(i).getEmail();
             rows[i][6] = stdList.get(i).getAddress();
-            
+
             ImageIcon pic = new ImageIcon(new ImageIcon(stdList.get(i).getPic()).getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH));
-            
+
             rows[i][7] = pic;
             StudentModel stdModel = new StudentModel(rows, colNames);
             jTable1.setModel(stdModel);
@@ -336,7 +350,7 @@ public class studentForm extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(7).setPreferredWidth(70);
         }
     }
-    
+
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabelCloseMouseClicked
@@ -360,7 +374,7 @@ public class studentForm extends javax.swing.JFrame {
         String classS = jComboBoxClass.getSelectedItem().toString();
         byte[] img = null;
         try {
-            
+
             Path pth = Paths.get(imagePth);
             img = Files.readAllBytes(pth);
         } catch (FileNotFoundException ex) {
@@ -368,18 +382,19 @@ public class studentForm extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         Student std = new Student(null, fname, lname, classS, phone, email, address, img, currentUserId);
-        
+
         StudentQuery stdQ = new StudentQuery();
         stdQ.insertStudent(std);
     }//GEN-LAST:event_jButtonAddStudentActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // display selected Jtable row data
-        
+
         // get selected row index
         int rowIndex = jTable1.getSelectedRow();
+        jTextFieldId.setText(jTable1.getValueAt(rowIndex, 0).toString());
         jTextFieldFname.setText(jTable1.getValueAt(rowIndex, 1).toString());
         jTextFieldLname.setText(jTable1.getValueAt(rowIndex, 2).toString());
         jComboBoxClass.setSelectedItem(jTable1.getValueAt(rowIndex, 3).toString());
@@ -392,27 +407,38 @@ public class studentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButtonEditStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditStudentActionPerformed
+        int id = Integer.valueOf(jTextFieldId.getText());
         String fname = jTextFieldFname.getText();
         String lname = jTextFieldLname.getText();
         String phone = jTextFieldPhone.getText();
         String email = jTextFieldEmail.getText();
         String address = jTextAreaAddress.getText();
         String classS = jComboBoxClass.getSelectedItem().toString();
-        byte[] img = null;
-        try {
-            
-            Path pth = Paths.get(imagePth);
-            img = Files.readAllBytes(pth);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+        // if the user want to update data and the profile pic
+        if (imagePth != null) {
+            byte[] img = null;
+            try {
+
+                Path pth = Paths.get(imagePth);
+                img = Files.readAllBytes(pth);
+
+                Student std = new Student(id, fname, lname, classS, phone, email, address, img, currentUserId);
+
+                StudentQuery stdQ = new StudentQuery();
+                stdQ.updateStudent(std, true);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Student std = new Student(id, fname, lname, classS, phone, email, address, null, currentUserId);
+
+            StudentQuery stdQ = new StudentQuery();
+            stdQ.updateStudent(std, false);
         }
-        
-        Student std = new Student(null, fname, lname, classS, phone, email, address, img, currentUserId);
-        
-        StudentQuery stdQ = new StudentQuery();
-        stdQ.insertStudent(std);
+
+
     }//GEN-LAST:event_jButtonEditStudentActionPerformed
 
     /**
@@ -456,6 +482,7 @@ public class studentForm extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditStudent;
     private javax.swing.JComboBox<String> jComboBoxClass;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -476,6 +503,7 @@ public class studentForm extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaAddress;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldFname;
+    private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldLname;
     private javax.swing.JTextField jTextFieldPhone;
     // End of variables declaration//GEN-END:variables
