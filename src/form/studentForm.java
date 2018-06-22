@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -385,20 +386,24 @@ public class studentForm extends javax.swing.JFrame {
         String address = jTextAreaAddress.getText();
         String classS = jComboBoxClass.getSelectedItem().toString();
         byte[] img = null;
-        try {
+        if (imagePth != null) {
+            try {
 
-            Path pth = Paths.get(imagePth);
-            img = Files.readAllBytes(pth);
-        } catch (IOException ex) {
-            Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+                Path pth = Paths.get(imagePth);
+                img = Files.readAllBytes(pth);
+                Student std = new Student(null, fname, lname, classS, phone, email, address, img, currentUserId);
+
+                StudentQuery stdQ = new StudentQuery();
+                stdQ.insertStudent(std);
+                refreshJtable();
+                clearFields();
+            } catch (IOException ex) {
+                Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "You must select a profile photo");
         }
 
-        Student std = new Student(null, fname, lname, classS, phone, email, address, img, currentUserId);
-
-        StudentQuery stdQ = new StudentQuery();
-        stdQ.insertStudent(std);
-        refreshJtable();
-        clearFields();
     }//GEN-LAST:event_jButtonAddStudentActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -467,8 +472,8 @@ public class studentForm extends javax.swing.JFrame {
         jTable1.setModel(new DefaultTableModel());
         populateJTable();
     }
-    
-    public void clearFields(){
+
+    public void clearFields() {
         jTextFieldId.setText("");
         jTextFieldFname.setText("");
         jTextFieldLname.setText("");
@@ -477,6 +482,7 @@ public class studentForm extends javax.swing.JFrame {
         jTextAreaAddress.setText("");
         jComboBoxClass.setSelectedItem(0);
         jLabelStudentPic.setIcon(null);
+        imagePth = null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
