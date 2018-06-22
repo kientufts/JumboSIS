@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -388,8 +389,6 @@ public class studentForm extends javax.swing.JFrame {
 
             Path pth = Paths.get(imagePth);
             img = Files.readAllBytes(pth);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -398,6 +397,7 @@ public class studentForm extends javax.swing.JFrame {
 
         StudentQuery stdQ = new StudentQuery();
         stdQ.insertStudent(std);
+        refreshJtable();
     }//GEN-LAST:event_jButtonAddStudentActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -437,8 +437,7 @@ public class studentForm extends javax.swing.JFrame {
 
                 StudentQuery stdQ = new StudentQuery();
                 stdQ.updateStudent(std, true);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
+                refreshJtable();
             } catch (IOException ex) {
                 Logger.getLogger(studentForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -447,6 +446,7 @@ public class studentForm extends javax.swing.JFrame {
 
             StudentQuery stdQ = new StudentQuery();
             stdQ.updateStudent(std, false);
+            refreshJtable();
         }
 
 
@@ -456,8 +456,13 @@ public class studentForm extends javax.swing.JFrame {
         int id = Integer.valueOf(jTextFieldId.getText());
         StudentQuery stdQ = new StudentQuery();
         stdQ.deleteStudent(id);
+        refreshJtable();
     }//GEN-LAST:event_jButtonDeleteStudentActionPerformed
 
+    public void refreshJtable() {
+        jTable1.setModel(new DefaultTableModel());
+        populateJTable();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddStudent;
